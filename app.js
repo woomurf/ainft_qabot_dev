@@ -91,13 +91,10 @@ const chat = async (textInputs) => {
   const prompt = `${data}\nHuman: ${textInputs}\nAI:`;
   try {
     const responseData = await axios.post(generationEndPoint, {
-      text_inputs: prompt,
-      temperature: 0.9,
-      top_p: 0.95,
-      repetition_penalty: 0.8,
-      do_sample: true,
-      top_k: 50,
-      length: 50,
+      "text_inputs": prompt,
+      "temperature": 0,
+      "length": 50,
+      "top_p": 1,
     });
     const responseText = responseData.data[0].substr(prompt.length);
     const processedResponse = processingResponse(responseText);
