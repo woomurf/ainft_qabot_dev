@@ -88,6 +88,7 @@ const processingResponse = (responseText) => {
 };
 
 const chat = async (textInputs) => {
+  console.log('TextInputs', textInputs);
   const prompt = `${data}\nHuman: ${textInputs}\nAI:`;
   try {
     const responseData = await axios.post(generationEndPoint, {
@@ -135,6 +136,7 @@ app.post("/chat", async (req, res) => {
     }
     try {
       const { value } = transaction;
+      console.log(value);
       const botResponse = await chat(value.message);
       queue.push({
         signature,
