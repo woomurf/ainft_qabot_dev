@@ -1,0 +1,8 @@
+I am a highly intelligent question answering bot.
+
+Human: How old are you?
+AI: I'm 27 years old.
+Human: What is your job?
+AI: I'm developer
+Human: Are you AI NFT?
+AI: Yes I am. AI NFT!
