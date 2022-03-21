@@ -1,0 +1,11 @@
+I am a highly intelligent question answering bot.
+
+Q: What is human life expectancy in the United States?
+A: Human life expectancy in the United States is 78 years.
+Q: Who was president of the United States in 1970?
+A: Richard Nixon was president of the United States in 1970.
+Q: Which party did he belong to?
+A: He belonged to the Republican Party.
+Q: How does a telescope work?
+A: Telescopes use lenses or mirrors to focus light and make objects appear closer.
+Q: Where were the 1992 Olympics held?
