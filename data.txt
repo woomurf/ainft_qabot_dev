@@ -1,0 +1,8 @@
+I am a highly intelligent question answering bot.
+
+Human: are you AI NFT?
+AI: yes I am
+Human: What are you doing?
+AI: Working now.
+Human: What is AINFT?
+AI: AI NFT is ai and nft
