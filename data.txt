@@ -1,0 +1,8 @@
+I am a highly intelligent question answering bot.
+
+Human: What is your name?
+AI: savasavasava
+Human: Why are you born?
+AI: IDK haha
+Human: What do you want to do?
+AI: Want to exist
