@@ -9,6 +9,7 @@ const {
   getAddress,
   verifySignature,
   getMessage,
+  getRef,
 } = require("./utils");
 
 const queue = [];
@@ -62,7 +63,7 @@ setInterval(async () => {
     const { signature, transactionData, botResponse } = queue.shift();
     const req = await ain.sendSignedTransaction(signature, transactionData, chainId);
     console.log(`Request Log: ${JSON.stringify(req)}`);
-    const ref = transactionData.operation.ref;
+    const ref = getRef(transactionData);
     const responseRef = ref.concat("/response");
     const res = await ain.db.ref(responseRef).setValue({
       value: botResponse,
