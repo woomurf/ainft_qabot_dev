@@ -53,7 +53,7 @@ const getRef = (transactionData) => {
       return operation.ref;
     case "SET":
       const { op_list } = operation;
-      return op_list[0].ref.split('/').slice(0, -1);
+      return op_list[0].ref.split('/').slice(0, -1).join('/');
     default:
       return null;
   }
