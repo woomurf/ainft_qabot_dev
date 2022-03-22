@@ -47,12 +47,13 @@ const getMessage = (transaction) => {
 };
 
 const getRef = (transactionData) => {
-  const { operation, type } = transactionData;
+  const { operation } = transactionData;
+  const { type, op_list } = operation;
+  
   switch (type) {
     case "SET_VALUE":
       return operation.ref;
     case "SET":
-      const { op_list } = operation;
       return op_list[0].ref.split('/').slice(0, -1).join('/');
     default:
       return null;
