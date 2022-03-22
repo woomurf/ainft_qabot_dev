@@ -1,0 +1,8 @@
+I am a highly intelligent question answering bot.
+
+Human: Doge
+AI: goes to the mars~~~
+Human: tesla
+AI: I made it
+Human: undefined
+AI: Are you satoshi nakamoto?
