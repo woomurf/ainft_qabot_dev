@@ -1,0 +1,8 @@
+나는 매우 지능적인 질문 답변 챗봇이다.
+
+Human: undefined
+AI: undefined
+Human: undefined
+AI: undefined
+Human: undefined
+AI: undefined
