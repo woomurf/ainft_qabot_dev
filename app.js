@@ -13,8 +13,7 @@ Load ENV
  */
 const dataFilePath = process.env.DATA_FILE_PATH || "data.txt";
 const endpoint =
-  process.env.ENDPOINT ||
-  "https://eleuther-ai-gpt-j-6b-float16-text-generation-api-ainize-team.endpoint.ainize.ai";
+  process.env.ENDPOINT || "https://eleuther-ai-gpt-j-6b-float16-text-generation-api-ainize-team.endpoint.ainize.ai";
 const port = process.env.PORT || 3000;
 const providerURL = process.env.PROVIDER_URL;
 const ainizeInternalPrivateKey = process.env.AINIZE_INTERNAL_PRIVATE_KEY;
@@ -22,11 +21,15 @@ const ainizeInternalPrivateKey = process.env.AINIZE_INTERNAL_PRIVATE_KEY;
 const generationEndPoint = `${endpoint}/predictions/text-generation`;
 const healthCheckEndPoint = `${endpoint}/ping`;
 
-const chainId = providerURL.includes("mainnet") ? 1 : 0;
+let chainId = 0;
+if (providerURL.includes("mainnet")) {
+  chainId = 1;
+} else if (providerURL.includes("dev")) {
+  chainId = 2;
+}
+
 const ain = new Ain(providerURL, chainId);
-const ainAddress = Ain.utils.toChecksumAddress(
-  ain.wallet.add(ainizeInternalPrivateKey)
-);
+const ainAddress = Ain.utils.toChecksumAddress(ain.wallet.add(ainizeInternalPrivateKey));
 ain.wallet.setDefaultAccount(ainAddress);
 
 /*
@@ -52,11 +55,7 @@ setInterval(async () => {
   try {
     if (queue.length === 0) return;
     const { signature, transactionData, botResponse } = queue.shift();
-    const req = await ain.sendSignedTransaction(
-      signature,
-      transactionData,
-      chainId
-    );
+    const req = await ain.sendSignedTransaction(signature, transactionData, chainId);
     console.log(`Request Log: ${JSON.stringify(req)}`);
     const ref = transactionData.operation.ref;
     const responseRef = ref.concat("/response");
@@ -88,14 +87,14 @@ const processingResponse = (responseText) => {
 };
 
 const chat = async (textInputs) => {
-  console.log('TextInputs', textInputs);
+  console.log("TextInputs", textInputs);
   const prompt = `${data}\nHuman: ${textInputs}\nAI:`;
   try {
     const responseData = await axios.post(generationEndPoint, {
-      "text_inputs": prompt,
-      "temperature": 0,
-      "length": 50,
-      "top_p": 1,
+      text_inputs: prompt,
+      temperature: 0,
+      length: 50,
+      top_p: 1,
     });
     const responseText = responseData.data[0].substr(prompt.length);
     const processedResponse = processingResponse(responseText);
@@ -115,16 +114,12 @@ app.post("/chat", async (req, res) => {
   try {
     const sigAddr = getAddress(txHash, signature, chainId);
     if (!verifySignature(transactionData, signature, sigAddr, chainId)) {
-      res
-        .status(401)
-        .json(`Invalid transaction or signature : ${JSON.stringify(req.body)}`);
+      res.status(401).json(`Invalid transaction or signature : ${JSON.stringify(req.body)}`);
       return;
     }
     if (!("operation" in transactionData)) {
       console.error(`Invalid transaction : ${JSON.stringify(transactionData)}`);
-      res
-        .status(400)
-        .json(`Invalid transaction : ${JSON.stringify(transactionData)}`);
+      res.status(400).json(`Invalid transaction : ${JSON.stringify(transactionData)}`);
       return;
     }
     const transaction = transactionData.operation;
