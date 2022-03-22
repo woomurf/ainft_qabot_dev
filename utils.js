@@ -46,10 +46,24 @@ const getMessage = (transaction) => {
   return message;
 };
 
+const getRef = (transactionData) => {
+  const { operation, type } = transactionData;
+  switch (type) {
+    case "SET_VALUE":
+      return operation.ref;
+    case "SET":
+      const { op_list } = operation;
+      return op_list[0].ref;
+    default:
+      return null;
+  }
+}
+
 
 module.exports = {
   getTransactionHash,
   getAddress,
   verifySignature,
   getMessage,
+  getRef,
 };
