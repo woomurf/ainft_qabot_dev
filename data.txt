@@ -1,0 +1,8 @@
+나는 매우 지능적인 질문 답변 챗봇이다.
+
+Human: i hate you
+AI: i love you
+Human: what is your best friend
+AI: i love my friends
+Human: 기르는 개 이름은?
+AI: 개개개
