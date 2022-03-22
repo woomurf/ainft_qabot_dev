@@ -4,7 +4,12 @@ const fs = require("fs");
 const axios = require("axios");
 const Ain = require("@ainblockchain/ain-js").default;
 
-const { getTransactionHash, getAddress, verifySignature } = require("./utils");
+const {
+  getTransactionHash,
+  getAddress,
+  verifySignature,
+  getMessage,
+} = require("./utils");
 
 const queue = [];
 
@@ -114,6 +119,7 @@ app.post("/chat", async (req, res) => {
   try {
     const sigAddr = getAddress(txHash, signature, chainId);
     if (!verifySignature(transactionData, signature, sigAddr, chainId)) {
+      console.error(`Invalid transaction or signature : ${JSON.stringify(req.body)}`);
       res.status(401).json(`Invalid transaction or signature : ${JSON.stringify(req.body)}`);
       return;
     }
@@ -130,9 +136,9 @@ app.post("/chat", async (req, res) => {
       return;
     }
     try {
-      const { value } = transaction;
-      console.log(value);
-      const botResponse = await chat(value.message);
+      const message = getMessage(transaction);
+      console.log(`message: ${message}`);
+      const botResponse = await chat(message);
       queue.push({
         signature,
         transactionData,
@@ -144,6 +150,7 @@ app.post("/chat", async (req, res) => {
       res.status(500).json(`Failed : ${error}`);
     }
   } catch (error) {
+    console.error(`Invalid transaction or signature : ${error}`);
     res.status(401).json(`Invalid transaction or signature : ${error}`);
     return;
   }
