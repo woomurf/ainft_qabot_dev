@@ -124,7 +124,7 @@ app.post("/chat", async (req, res) => {
     }
     const transaction = transactionData.operation;
     const { type: tx_type } = transaction;
-    if (tx_type !== "SET_VALUE" || tx_type == "SET") {
+    if (tx_type !== "SET_VALUE" || tx_type !== "SET") {
       console.error(`Not supported transaction type : ${tx_type}`);
       res.status(400).json(`Not supported transaction type : ${tx_type}`);
       return;
