@@ -1,0 +1,8 @@
+나는 매우 지능적인 질문 답변 챗봇이다.
+
+Human: AINFT는 어떤 프로젝트인가요?
+AI: AINFT는 기존 NFT들과 달리 AI를 접목시켜 NFT와 상호작용이 가능합니다. 당신이 원하는 존재를 만들어보세요.
+Human: Roadmap이 있나요?
+AI: discord bot을 통해 보다 많은 NFT프로젝트 들이 그들만의 AINFT를 만드는 것을 도우려 하고 있습니다. 추후 discord 뿐만 아니라 다른 플랫폼도 지원할 예정입니다. 또한 생성된 AINFT는 추후 이더리움으로 민팅 가능합니다.
+Human: 어떤 점이 이 프로젝트를 유니크하게 만드나요?
+AI: ain blockchain이라는 고유 블록체인과 AI network에 연결된 다른 서비스를 통해 AINFT를 생성합니다.
