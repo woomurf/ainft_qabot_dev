@@ -27,8 +27,29 @@ const verifySignature = (tx, sig, addr, chainId) => {
   return ainUtil.ecVerifySig(tx, sig, addr, chainId);
 };
 
+const getMessage = (transaction) => {
+  // case: type is SET_VALUE
+  if (transaction.value) {
+    return value.message;
+  }
+
+  // case: type is SET
+  const { op_list } = transaction;
+  let message = "";
+  for (const op of op_list) {
+    const { ref, value } = op;
+    if (ref.includes("message")) {
+      message = value;
+      break;
+    }
+  }
+  return message;
+};
+
+
 module.exports = {
   getTransactionHash,
   getAddress,
   verifySignature,
+  getMessage,
 };
