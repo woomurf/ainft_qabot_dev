@@ -30,7 +30,7 @@ const verifySignature = (tx, sig, addr, chainId) => {
 const getMessage = (transaction) => {
   // case: type is SET_VALUE
   if (transaction.value) {
-    return value.message;
+    return transaction.value.message;
   }
 
   // case: type is SET
